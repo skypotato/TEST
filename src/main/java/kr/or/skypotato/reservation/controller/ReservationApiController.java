@@ -23,7 +23,6 @@ public class ReservationApiController {
 		List<Category> resultCategories = categoryService.getAllCategories();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("items", resultCategories);
-		map.put("size", resultCategories.size());
 		return map;
 	}
 }

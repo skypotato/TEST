@@ -1,7 +1,7 @@
 package kr.or.skypotato.reservation.dao;
 
 public class CategoryDaoSqls {
-	public static final String SELECT_CATEGORIES = ""
+	public static final String SELECT_ALL_CATEGORIES = ""
 			+ "SELECT ctg.id, ctg.name, COUNT(disInfo.id) AS count "
 			+ "\nFROM category ctg "
 			+ "\nLEFT JOIN product prd ON  ctg.id = prd.category_id "

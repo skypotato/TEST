@@ -1,6 +1,6 @@
 package kr.or.skypotato.reservation.dao;
 
-import static kr.or.skypotato.reservation.dao.CategoryDaoSqls.SELECT_CATEGORIES;
+import static kr.or.skypotato.reservation.dao.CategoryDaoSqls.SELECT_ALL_CATEGORIES;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class CategoryDao {
 	}
 
 	public List<Category> selectAll() {
-		return jdbc.query(SELECT_CATEGORIES, rowMapper);
+		return jdbc.query(SELECT_ALL_CATEGORIES, rowMapper);
 	}
 
 }
