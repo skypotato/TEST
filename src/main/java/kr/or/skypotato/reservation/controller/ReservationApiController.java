@@ -40,9 +40,15 @@ public class ReservationApiController {
 		){
 		final int LIMIT_AMT = 4;
 		List<Product> resultProducts = productService.getAllProducts(categoryId);
+		
+		int totalCount = resultProducts.size();
+		int end = start + LIMIT_AMT;
+		
+		if(end>totalCount) end=totalCount;
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("totalCount", resultProducts.size());
-		map.put("items", resultProducts.subList(start, LIMIT_AMT));
+		map.put("totalCount", totalCount);
+		map.put("items", resultProducts.subList(start, end));
 		return map;
 	}
 	// 1.3. 프로모션 정보 구하기
