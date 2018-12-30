@@ -31,6 +31,10 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + "]";
+		String categoryStr = "Category [id=${id},name=\"${name}\",count=${count}]";
+		categoryStr = categoryStr.replaceAll("${id}",	""+id);
+		categoryStr = categoryStr.replaceAll("${name}",	name);
+		categoryStr = categoryStr.replaceAll("${count}",""+count);
+		return categoryStr;
 	}
 }

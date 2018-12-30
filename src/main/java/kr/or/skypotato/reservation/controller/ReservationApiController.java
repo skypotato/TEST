@@ -6,18 +6,25 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.skypotato.reservation.dto.Category;
+import kr.or.skypotato.reservation.dto.Product;
 import kr.or.skypotato.reservation.service.CategoryService;
+import kr.or.skypotato.reservation.service.ProductService;
 
 @RestController
 @RequestMapping(path="/api")
 public class ReservationApiController {
 	@Autowired
 	CategoryService categoryService;
+	@Autowired
+	ProductService productService;
 	
+	// 1.1. 카테고리 목록 구하기
 	@GetMapping("/categories")
 	public Map<String, Object> readAllCategories() {
 		List<Category> resultCategories = categoryService.getAllCategories();
@@ -25,4 +32,25 @@ public class ReservationApiController {
 		map.put("items", resultCategories);
 		return map;
 	}
+	// 1.2. 상품 목록 구하기
+	@GetMapping("/products")
+	public Map<String, Object> readAllProducts(
+			@RequestParam(name="start", required=false, defaultValue="0") int start,
+			@RequestParam(name="categoryId", required=false, defaultValue="0") int categoryId
+		){
+		final int LIMIT_AMT = 4;
+		List<Product> resultProducts = productService.getAllProducts(start, categoryId, LIMIT_AMT);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("totalCount", resultProducts.size());
+		map.put("items", resultProducts.subList(start, LIMIT_AMT));
+		return map;
+	}
+	// 1.3. 프로모션 정보 구하기
+//	@GetMapping("/promotions")
+//	public Map<String, Object> readAllPromotions() {
+//		List<Category> resultPromotions = categoryService.getAllCategories();
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("items", resultPromotions);
+//		return map;
+//	}
 }
