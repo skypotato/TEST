@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.skypotato.reservation.dto.Category;
 import kr.or.skypotato.reservation.dto.Product;
+import kr.or.skypotato.reservation.dto.Promotion;
 import kr.or.skypotato.reservation.service.CategoryService;
 import kr.or.skypotato.reservation.service.ProductService;
+import kr.or.skypotato.reservation.service.PromotionService;
 
 @RestController
 @RequestMapping(path="/api")
@@ -23,6 +25,8 @@ public class ReservationApiController {
 	CategoryService categoryService;
 	@Autowired
 	ProductService productService;
+	@Autowired
+	PromotionService promotionService;
 	
 	// 1.1. 카테고리 목록 구하기
 	@GetMapping("/categories")
@@ -52,11 +56,11 @@ public class ReservationApiController {
 		return map;
 	}
 	// 1.3. 프로모션 정보 구하기
-//	@GetMapping("/promotions")
-//	public Map<String, Object> readAllPromotions() {
-//		List<Category> resultPromotions = categoryService.getAllCategories();
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("items", resultPromotions);
-//		return map;
-//	}
+	@GetMapping("/promotions")
+	public Map<String, Object> readAllPromotions() {
+		List<Promotion> resultPromotions = promotionService.getAllPromotions();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("items", resultPromotions);
+		return map;
+	}
 }
