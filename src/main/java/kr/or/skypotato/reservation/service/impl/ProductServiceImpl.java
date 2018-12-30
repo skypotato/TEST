@@ -14,7 +14,7 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductDao productDao;
 
-	public List<Product> getAllProducts(int start, int categoryId, int limit) {
-		return productDao.selectAll(start, categoryId, limit);
+	public List<Product> getAllProducts(int categoryId) {
+		return productDao.selectAll(categoryId);
 	}
 }

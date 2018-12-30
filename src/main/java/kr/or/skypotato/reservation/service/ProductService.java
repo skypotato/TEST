@@ -6,5 +6,5 @@ import kr.or.skypotato.reservation.dto.Product;
 
 public interface ProductService {
 	// 모든 상품 조회
-	public List<Product> getAllProducts(int start, int categoryId, int limit);
+	public List<Product> getAllProducts(int categoryId);
 }

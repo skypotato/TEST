@@ -39,7 +39,7 @@ public class ReservationApiController {
 			@RequestParam(name="categoryId", required=false, defaultValue="0") int categoryId
 		){
 		final int LIMIT_AMT = 4;
-		List<Product> resultProducts = productService.getAllProducts(start, categoryId, LIMIT_AMT);
+		List<Product> resultProducts = productService.getAllProducts(categoryId);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("totalCount", resultProducts.size());
 		map.put("items", resultProducts.subList(start, LIMIT_AMT));

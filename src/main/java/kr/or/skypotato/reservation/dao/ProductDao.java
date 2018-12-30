@@ -24,7 +24,7 @@ public class ProductDao {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<Product> selectAll(int start, int categoryId, int limit) {
+	public List<Product> selectAll(int categoryId) {
 		String strQuery = "";
 		String strDynamicQuery = "";
 		
@@ -34,6 +34,7 @@ public class ProductDao {
 			strDynamicQuery = "WHERE prd.category_id = :categoryId";
 			params.put("categoryId", categoryId);
 		}
+		
 		strQuery = SELECT_ALL_PRODUCTS.replace("${dynamicQuery}", strDynamicQuery);
 		
 		return jdbc.query(strQuery, params, rowMapper);
