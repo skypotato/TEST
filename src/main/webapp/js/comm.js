@@ -59,7 +59,6 @@ function CategoryList(){
 	this.onload = function(element){
 		_this = this;
 		_ctgList = element;
-		_this.getData();
 	}
 	/**
 	 * 데이터 조회
