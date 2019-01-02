@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.skypotato.reservation.dto.Category;
 import kr.or.skypotato.reservation.dto.DisplayInfo;
+import kr.or.skypotato.reservation.dto.DisplayInfoImage;
 import kr.or.skypotato.reservation.dto.Product;
 import kr.or.skypotato.reservation.dto.Promotion;
 import kr.or.skypotato.reservation.service.CategoryService;
+import kr.or.skypotato.reservation.service.DisplayInfoImageService;
 import kr.or.skypotato.reservation.service.DisplayInfoService;
 import kr.or.skypotato.reservation.service.ProductService;
 import kr.or.skypotato.reservation.service.PromotionService;
@@ -31,6 +33,8 @@ public class ReservationApiController {
 	PromotionService promotionService;
 	@Autowired
 	DisplayInfoService displayInfoService;
+	@Autowired
+	DisplayInfoImageService displayInfoImageService;
 	
 	// 1.1. 카테고리 목록 구하기
 	@GetMapping("/categories")
@@ -63,9 +67,11 @@ public class ReservationApiController {
 	@GetMapping("/products/{displayInfoId}")
 	public Map<String, Object> readOneDisplayProduct(@PathVariable(name="displayInfoId") int displayInfoId){
 		DisplayInfo displayInfo = displayInfoService.getOneDisplayInfo(displayInfoId).get(0);
+		DisplayInfoImage displayInfoImage = displayInfoImageService.getOneDisplayInfoImage(displayInfoId).get(0);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("displayInfo", displayInfo);
+		map.put("displayInfoImage", displayInfoImage);
 		return map;
 	}
 	// 3.3. 프로모션 정보 구하기
