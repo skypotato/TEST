@@ -17,12 +17,14 @@ import kr.or.skypotato.reservation.dto.DisplayInfo;
 import kr.or.skypotato.reservation.dto.DisplayInfoImage;
 import kr.or.skypotato.reservation.dto.Product;
 import kr.or.skypotato.reservation.dto.ProductImage;
+import kr.or.skypotato.reservation.dto.ProductPrice;
 import kr.or.skypotato.reservation.dto.Promotion;
 import kr.or.skypotato.reservation.service.CategoryService;
 import kr.or.skypotato.reservation.service.CommentService;
 import kr.or.skypotato.reservation.service.DisplayInfoImageService;
 import kr.or.skypotato.reservation.service.DisplayInfoService;
 import kr.or.skypotato.reservation.service.ProductImageService;
+import kr.or.skypotato.reservation.service.ProductPriceService;
 import kr.or.skypotato.reservation.service.ProductService;
 import kr.or.skypotato.reservation.service.PromotionService;
 
@@ -43,6 +45,8 @@ public class ReservationApiController {
 	DisplayInfoImageService displayInfoImageService;
 	@Autowired
 	CommentService commentService;
+	@Autowired
+	ProductPriceService productPriceService;
 	
 	// 1.1. 카테고리 목록 구하기
 	@GetMapping("/categories")
@@ -79,6 +83,7 @@ public class ReservationApiController {
 		
 		List<ProductImage> productImages = productImageService.getAllProductImages(displayInfoId);
 		List<Comment> comments = commentService.getAllComments(displayInfoId);
+		List<ProductPrice> productPrices = productPriceService.getAllProductPrices(displayInfoId);
 		float averageScore = commentService.getAverageScore(displayInfoId);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -87,6 +92,7 @@ public class ReservationApiController {
 		map.put("displayInfoImage", displayInfoImage);
 		map.put("comments", comments);
 		map.put("averageScore", averageScore);
+		map.put("productPrices", productPrices);
 		return map;
 	}
 	// 3.3. 프로모션 정보 구하기
