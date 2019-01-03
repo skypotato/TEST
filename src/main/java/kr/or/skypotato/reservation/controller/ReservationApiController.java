@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.skypotato.reservation.dto.Category;
+import kr.or.skypotato.reservation.dto.Comment;
 import kr.or.skypotato.reservation.dto.DisplayInfo;
 import kr.or.skypotato.reservation.dto.DisplayInfoImage;
 import kr.or.skypotato.reservation.dto.Product;
 import kr.or.skypotato.reservation.dto.ProductImage;
 import kr.or.skypotato.reservation.dto.Promotion;
 import kr.or.skypotato.reservation.service.CategoryService;
+import kr.or.skypotato.reservation.service.CommentService;
 import kr.or.skypotato.reservation.service.DisplayInfoImageService;
 import kr.or.skypotato.reservation.service.DisplayInfoService;
 import kr.or.skypotato.reservation.service.ProductImageService;
@@ -39,6 +41,8 @@ public class ReservationApiController {
 	ProductImageService productImageService;
 	@Autowired
 	DisplayInfoImageService displayInfoImageService;
+	@Autowired
+	CommentService commentService;
 	
 	// 1.1. 카테고리 목록 구하기
 	@GetMapping("/categories")
@@ -74,11 +78,13 @@ public class ReservationApiController {
 		DisplayInfoImage displayInfoImage = displayInfoImageService.getOneDisplayInfoImage(displayInfoId).get(0);
 		
 		List<ProductImage> productImages = productImageService.getAllProductImages(displayInfoId);
+		List<Comment> comments = commentService.getAllComments(displayInfoId);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("displayInfo", displayInfo);
 		map.put("productImages", productImages);
 		map.put("displayInfoImage", displayInfoImage);
+		map.put("comments", comments);
 		return map;
 	}
 	// 3.3. 프로모션 정보 구하기
