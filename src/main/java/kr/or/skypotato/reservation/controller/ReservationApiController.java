@@ -73,7 +73,7 @@ public class ReservationApiController {
 		DisplayInfo displayInfo = displayInfoService.getOneDisplayInfo(displayInfoId).get(0);
 		DisplayInfoImage displayInfoImage = displayInfoImageService.getOneDisplayInfoImage(displayInfoId).get(0);
 		
-		List<ProductImage> productImages = productImageService.getAllProductImage(displayInfoId);
+		List<ProductImage> productImages = productImageService.getAllProductImages(displayInfoId);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("displayInfo", displayInfo);

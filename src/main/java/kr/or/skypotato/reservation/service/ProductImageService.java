@@ -6,5 +6,5 @@ import kr.or.skypotato.reservation.dto.DisplayInfo;
 import kr.or.skypotato.reservation.dto.ProductImage;
 
 public interface ProductImageService {
-	public List<ProductImage> getAllProductImage(int displayInfoId);
+	public List<ProductImage> getAllProductImages(int displayInfoId);
 }
