@@ -14,6 +14,7 @@ public class ProductImageServiceImpl implements ProductImageService {
 	@Autowired
 	ProductImageDao productImageDao;
 
+	@Override
 	public List<ProductImage> getAllProductImages(int displayInfoId) {
 		return productImageDao.selectAll(displayInfoId);
 	}

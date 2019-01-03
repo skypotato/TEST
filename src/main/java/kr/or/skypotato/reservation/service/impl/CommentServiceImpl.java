@@ -17,6 +17,7 @@ public class CommentServiceImpl implements CommentService {
 	@Autowired
 	CommentImageDao commentImageDao;
 
+	@Override
 	public List<Comment> getAllComments(int displayInfoId) {
 		List<Comment> comments = commentDao.selectAll(displayInfoId);
 		for(int i=0;i<comments.size();i++){
@@ -27,5 +28,16 @@ public class CommentServiceImpl implements CommentService {
 			comments.set(i, comment);
 		}
 		return comments;
+	}
+
+	@Override
+	public float getAverageScore(int displayInfoId) {
+		List<Comment> comments = commentDao.selectAll(displayInfoId);
+		float totalScore = 0;
+		for(int i=0;i<comments.size();i++){
+			Comment comment = comments.get(i);
+			totalScore += comment.getScore();
+		}
+		return totalScore/comments.size();
 	}
 }

@@ -14,6 +14,7 @@ public class CommentImageServiceImpl implements CommentImageService {
 	@Autowired
 	CommentImageDao commentImageDao;
 
+	@Override
 	public List<CommentImage> getAllCommentImages(int commentId) {
 		return commentImageDao.selectAll(commentId);
 	}

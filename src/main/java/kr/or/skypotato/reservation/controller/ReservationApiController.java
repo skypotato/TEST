@@ -79,12 +79,14 @@ public class ReservationApiController {
 		
 		List<ProductImage> productImages = productImageService.getAllProductImages(displayInfoId);
 		List<Comment> comments = commentService.getAllComments(displayInfoId);
+		float averageScore = commentService.getAverageScore(displayInfoId);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("displayInfo", displayInfo);
 		map.put("productImages", productImages);
 		map.put("displayInfoImage", displayInfoImage);
 		map.put("comments", comments);
+		map.put("averageScore", averageScore);
 		return map;
 	}
 	// 3.3. 프로모션 정보 구하기

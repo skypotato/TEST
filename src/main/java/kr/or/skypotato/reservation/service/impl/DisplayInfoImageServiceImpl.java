@@ -14,6 +14,7 @@ public class DisplayInfoImageServiceImpl implements DisplayInfoImageService {
 	@Autowired
 	DisplayInfoImageDao displayInfoImageDao;
 
+	@Override
 	public List<DisplayInfoImage> getOneDisplayInfoImage(int displayInfoId) {
 		return displayInfoImageDao.selectOne(displayInfoId);
 	}

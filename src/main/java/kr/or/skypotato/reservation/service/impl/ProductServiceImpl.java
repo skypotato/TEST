@@ -14,6 +14,7 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductDao productDao;
 
+	@Override
 	public List<Product> getAllProducts(int categoryId) {
 		return productDao.selectAll(categoryId);
 	}
