@@ -15,10 +15,12 @@ import kr.or.skypotato.reservation.dto.Category;
 import kr.or.skypotato.reservation.dto.DisplayInfo;
 import kr.or.skypotato.reservation.dto.DisplayInfoImage;
 import kr.or.skypotato.reservation.dto.Product;
+import kr.or.skypotato.reservation.dto.ProductImage;
 import kr.or.skypotato.reservation.dto.Promotion;
 import kr.or.skypotato.reservation.service.CategoryService;
 import kr.or.skypotato.reservation.service.DisplayInfoImageService;
 import kr.or.skypotato.reservation.service.DisplayInfoService;
+import kr.or.skypotato.reservation.service.ProductImageService;
 import kr.or.skypotato.reservation.service.ProductService;
 import kr.or.skypotato.reservation.service.PromotionService;
 
@@ -33,6 +35,8 @@ public class ReservationApiController {
 	PromotionService promotionService;
 	@Autowired
 	DisplayInfoService displayInfoService;
+	@Autowired
+	ProductImageService productImageService;
 	@Autowired
 	DisplayInfoImageService displayInfoImageService;
 	
@@ -51,16 +55,16 @@ public class ReservationApiController {
 			@RequestParam(name="categoryId", required=false, defaultValue="0") int categoryId
 		){
 		final int LIMIT_AMT = 4;
-		List<Product> resultProducts = productService.getAllProducts(categoryId);
+		List<Product> products = productService.getAllProducts(categoryId);
 		
-		int totalCount = resultProducts.size();
+		int totalCount = products.size();
 		int end = start + LIMIT_AMT;
 		
 		if(end>totalCount) end=totalCount;
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("totalCount", totalCount);
-		map.put("items", resultProducts.subList(start, end));
+		map.put("items", products.subList(start, end));
 		return map;
 	}
 	// 2.2. 상품 전시 정보 구하기
@@ -69,8 +73,11 @@ public class ReservationApiController {
 		DisplayInfo displayInfo = displayInfoService.getOneDisplayInfo(displayInfoId).get(0);
 		DisplayInfoImage displayInfoImage = displayInfoImageService.getOneDisplayInfoImage(displayInfoId).get(0);
 		
+		List<ProductImage> productImages = productImageService.getAllProductImage(displayInfoId);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("displayInfo", displayInfo);
+		map.put("productImages", productImages);
 		map.put("displayInfoImage", displayInfoImage);
 		return map;
 	}

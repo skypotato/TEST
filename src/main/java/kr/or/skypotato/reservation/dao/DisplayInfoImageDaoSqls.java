@@ -15,5 +15,6 @@ public class DisplayInfoImageDaoSqls {
 			+ "\nFROM display_info_image disInfoImage "
 			+ "\nLEFT JOIN file_info fileInfo "
 			+ "\nON disInfoImage.file_id = fileInfo.id "
-			+ "\nWHERE disInfoImage.display_info_id = :displayInfoId ";
+			+ "\nWHERE disInfoImage.display_info_id = :displayInfoId "
+			+ "\nGROUP BY displayInfoImageId";
 }
