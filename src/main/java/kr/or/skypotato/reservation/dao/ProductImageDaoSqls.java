@@ -18,6 +18,7 @@ public class ProductImageDaoSqls {
 			+ "\nON prmImage.file_id = fileInfo.id "
 			+ "\nLEFT JOIN display_info disInfo "
 			+ "\nON prmImage.product_id = disInfo.product_id"
-			+ "\nWHERE disInfo.id = :displayInfoId "
+			+ "\nWHERE (prmImage.type = 'ma' OR prmImage.type = 'et') "
+			+ "\nAND disInfo.id = :displayInfoId "
 			+ "\nGROUP BY productImageId";
 }
