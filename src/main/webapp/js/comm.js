@@ -17,13 +17,34 @@ function ajax(url, callbackFn, isAsync) {
 	if (typeof callbackFn != 'function') {
 		return;
 	}
-	if(!isAsync) isAsync=true; // 기본적으로 비동기 방식을 사용한다.
-	
 	var oReq = new XMLHttpRequest();
 
 	oReq.addEventListener("load", callbackFn);
 	oReq.open("GET", url, isAsync);
 	oReq.send();
+}
+/**
+ * Get 파라미터 값 가져오기
+ * @param name
+ * @returns
+ */
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+/**
+ * handlebar를 이용한 템플릿 렌더링 함수
+ * @param id
+ * @param data
+ * @returns
+ */
+function getRederingTemplateById( id, data ){
+	var template = document.querySelector("#"+id).innerText;
+	var bindTemplate = Handlebars.compile(template);  //bindTemplate은 메서드입니다.
+	
+	return bindTemplate(data);
 }
 /**
  * replaceAll
