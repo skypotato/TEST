@@ -14,8 +14,12 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductDao productDao;
 
+	public List<Product> getAllProducts(int categoryId, int start, int limit) {
+		return productDao.selectAll(categoryId, start, limit);
+	}
+
 	@Override
-	public List<Product> getAllProducts(int categoryId) {
-		return productDao.selectAll(categoryId);
+	public int getTotalCount(int categoryId) {
+		return productDao.countAll(categoryId);
 	}
 }

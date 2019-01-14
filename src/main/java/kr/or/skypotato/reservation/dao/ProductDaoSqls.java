@@ -13,9 +13,14 @@ public class ProductDaoSqls {
 			+ "\nLEFT JOIN display_info disInfo "
 			+ "\nON prd.id = disInfo.product_id "
 			+ "\nLEFT JOIN product_image prdImg "
-			+ "\nON prd.id = prdImg.product_id "
+			+ "\nON prd.id = prdImg.product_id AND prdImg.type = 'ma' "
 			+ "\nLEFT JOIN file_info fileInfo "
 			+ "\nON prdImg.file_id = fileInfo.id "
 			+ "\n${dynamicQuery} "
-			+ "\nGROUP BY displayInfoId";
+			+ "\nLIMIT :start, :limit;";
+	public static final String COUNT_ALL_PRODUCTS = ""
+			+ "\nSELECT count(*) FROM product prd "
+			+ "\nLEFT JOIN display_info disInfo "
+			+ "\nON prd.id = disInfo.product_id"
+			+ "\n${dynamicQuery}";
 }

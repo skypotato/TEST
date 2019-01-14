@@ -57,7 +57,7 @@
                                <ul class="visual_img detail_swipe">
 									{{#each (limit productImages 2)}}
 									{{#ifEquals type "ma"}}
-								    <li class="item target" style="width: 414px;position: absolute;transform: translateX(0%);">
+								    <li class="item target" style="width: 414px;height: 414px;position: absolute;transform: translateX(0%);">
 										<img alt="{{fileName}}" class="img_thumb" src="{{saveFileName}}">
 										<span class="img_bg"></span>
 								        <div class="visual_txt">
@@ -68,7 +68,7 @@
 								        </div>
 								    </li>
 									{{else}}
-									<li class="item" style="width: 414px;width: 100%;position: absolute;transform: translateX(100%);">
+									<li class="item" style="width: 414px;height: 414px;position: absolute;transform: translateX(100%);">
 										<img alt="{{fileName}}" class="img_thumb" src="{{saveFileName}}">
 										<span class="img_bg"></span>
 								        <div class="visual_txt">
@@ -176,7 +176,7 @@
                     </div>
                     <a class="btn_review_more" href="./review"> <span>예매자 한줄평 더보기</span> <i class="fn fn-forward1"></i> </a>
                 </div>
-                <div class="section_info_tab">
+                <div class="section_info_tab" id="infoTab">
                     <!-- [D] tab 선택 시 anchor에 active 추가 -->
                     <ul class="info_tab_lst">
                         <li class="item active _detail">

@@ -184,3 +184,13 @@ function SlideNaviImages(){
 	}
 	
 }
+
+function TabList(){
+	var _this = null;
+	var _tabList = null;
+	
+	this.onload = function(element){
+		_this = this;
+		_tabList = element;
+	}
+}

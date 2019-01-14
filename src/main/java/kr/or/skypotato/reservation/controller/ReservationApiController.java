@@ -48,7 +48,8 @@ public class ReservationApiController {
 	@Autowired
 	ProductPriceService productPriceService;
 	
-	// 1.1. 카테고리 목록 구하기
+	private static final int PRODUCT_LIMIT_AMOUNT = 4;
+	
 	@GetMapping("/categories")
 	public Map<String, Object> readAllCategories() {
 		List<Category> resultCategories = categoryService.getAllCategories();
@@ -56,26 +57,20 @@ public class ReservationApiController {
 		map.put("items", resultCategories);
 		return map;
 	}
-	// 2.1. 상품 목록 구하기
 	@GetMapping("/products")
-	public Map<String, Object> readAllDisplayProducts(
+	public Map<String, Object> readAllProducts(
 			@RequestParam(name="start", required=false, defaultValue="0") int start,
 			@RequestParam(name="categoryId", required=false, defaultValue="0") int categoryId
 		){
-		final int LIMIT_AMT = 4;
-		List<Product> products = productService.getAllProducts(categoryId);
+		List<Product> resultProducts = productService.getAllProducts(categoryId, start, PRODUCT_LIMIT_AMOUNT);
 		
-		int totalCount = products.size();
-		int end = start + LIMIT_AMT;
-		
-		if(end>totalCount) end=totalCount;
+		int totalCount = productService.getTotalCount(categoryId);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("totalCount", totalCount);
-		map.put("items", products.subList(start, end));
+		map.put("items", resultProducts);
 		return map;
 	}
-	// 2.2. 상품 전시 정보 구하기
 	@GetMapping("/products/{displayInfoId}")
 	public Map<String, Object> readOneDisplayProduct(@PathVariable(name="displayInfoId") int displayInfoId){
 		DisplayInfo displayInfo = displayInfoService.getOneDisplayInfo(displayInfoId).get(0);
@@ -95,7 +90,6 @@ public class ReservationApiController {
 		map.put("productPrices", productPrices);
 		return map;
 	}
-	// 3.3. 프로모션 정보 구하기
 	@GetMapping("/promotions")
 	public Map<String, Object> readAllPromotions() {
 		List<Promotion> resultPromotions = promotionService.getAllPromotions();
