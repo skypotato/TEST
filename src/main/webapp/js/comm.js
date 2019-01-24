@@ -17,6 +17,8 @@ function ajax(url, callbackFn, isAsync) {
 	if (typeof callbackFn != 'function') {
 		return;
 	}
+	if(!isAsync) isAsync=true; // 기본적으로 비동기 방식을 사용한다.
+	
 	var oReq = new XMLHttpRequest();
 
 	oReq.addEventListener("load", callbackFn);

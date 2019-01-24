@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="section_event_tab">
+            <div class="section_event_tab" id="ctgDiv">
                 <ul class="event_tab_lst tab_lst_min" id="ctgList">
                     <li class="item" data-category="0">
                         <a class="anchor active"> <span>전체리스트</span> </a>
@@ -84,11 +84,19 @@
     </footer>
 
 	<script type="rv-template" id="categoryItem">
-	<li class="item" data-category="${id}">
-    	<a class="anchor ${active}">
-			<span>${name}</span>
-		</a>
-    </li>
+	<ul class="event_tab_lst tab_lst_min" id="ctgList">
+	    <li class="item" data-category="0">
+	        <a class="anchor active"> <span>전체리스트</span> </a>
+	    </li>
+		{{#if }}
+		{{#each (limit productImages 2)}}
+	    <li class="item" data-category="{{{id}}}">
+		  	<a class="anchor ${active}">
+				<span>{{name}}</span>
+			</a>
+		</li>
+		{{/each}}
+	</ul>
     </script>
     <script type="rv-template" id="promotionItem">
     <li class="item" style="width: 100%;position: absolute;transform: translateX(100%);background-image: url(${productImageUrl});">
