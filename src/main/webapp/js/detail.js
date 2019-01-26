@@ -43,6 +43,21 @@ var _me = {
 			document.querySelector("#foldBtn").style.display = "none";
 			document.querySelector("#unFoldBtn").style.display = "";
 		});
+		document.querySelector("#detailInfoBtn").addEventListener("click", function(){
+			document.querySelector("#detailInfoBtn").classList.add("active");
+			document.querySelector("#directionsBtn").classList.remove("active");
+			
+			document.querySelector(".detail_location").classList.add("hide");
+			document.querySelector(".detail_area_wrap").classList.remove("hide");
+		});
+		document.querySelector("#directionsBtn").addEventListener("click", function(){
+			document.querySelector("#directionsBtn").classList.add("active");
+			document.querySelector("#detailInfoBtn").classList.remove("active");
+			
+			document.querySelector(".detail_area_wrap").classList.add("hide");
+			document.querySelector(".detail_location").classList.remove("hide");
+			
+		});
 	}
 	/**
 	 * 데이터 조회하기
@@ -62,135 +77,5 @@ var _me = {
 	 */
 	,setProduct: function(data){
 		document.querySelector("body").insertAdjacentHTML("beforeend", getRederingTemplateById("product",data));
-	}
-}
-
-/**
- * 
- * @returns
- */
-function SlideNaviImages(){
-	var _this = null;
-	var _slideSection = null;
-	
-	var _slideElement = null;
-	var _prevBtn = null;
-	var _nextBtn = null;
-	
-	var _isActiveAni = false;
-	
-	this.onload = function(element){
-		_this = this;
-		_slideSection = element;
-		_slideElement = element.querySelector(".detail_swipe");
-		_prevBtn = _slideSection.querySelector(".btn_prev");
-		_nextBtn = _slideSection.querySelector(".btn_nxt");
-		_this.setEvent();
-	}
-	
-	this.getTargetItemIdx = function(){
-		var images = _slideElement.querySelectorAll(".item");
-		
-		for(var i=0;i < images.length;i++){
-			if(images[i].classList.contains("target"))
-				return i;
-		}
-	}
-	
-	this.initNaviBtn = function(){
-		var images = _slideElement.querySelectorAll(".item");
-		
-		if(images.length>1){
-			_prevBtn.querySelector("i").classList.add("off");
-			_nextBtn.querySelector("i").classList.remove("off");
-		}
-		else{
-			_prevBtn.querySelector("i").classList.add("off");
-			_nextBtn.querySelector("i").classList.add("off");
-		}
-	}
-	
-	this.prevAnimation = function(){
-		var images = _slideElement.querySelectorAll(".item");
-		var targetIdx = _this.getTargetItemIdx();		// 자레에서 좌측으로 이동할 item 인덱스
-		var actionIdx = (targetIdx-1)					// 자리에 위치할 item 인덱스
-		
-		if(actionIdx<0||_isActiveAni){
-			return;
-		}
-		
-		_isActiveAni = true;
-		
-		images[targetIdx].classList.remove("target");
-		images[actionIdx].classList.add("target");
-		images[targetIdx].style.transition = "transform 2s ease 0s";
-		images[actionIdx].style.transition = "transform 2s ease 0s";
-		images[targetIdx].style.transform = "translateX(100%)";
-		images[actionIdx].style.transform = "translateX(0%)";
-		
-		_nextBtn.querySelector("i").classList.remove("off");
-		if(actionIdx<=0){
-			_prevBtn.querySelector("i").classList.add("off")
-		}
-		
-		_slideSection.querySelector(".figure_pagination > .num").innerHTML=actionIdx+1
-		// transition delay
-		setTimeout(() => {
-			images[targetIdx].style.transition = "none";
-			_isActiveAni = false;
-		}, 2000);
-	}
-	
-	this.nextAnimation = function(){
-		var images = _slideElement.querySelectorAll(".item");
-		var targetIdx = _this.getTargetItemIdx();		// 자레에서 좌측으로 이동할 item 인덱스
-		var actionIdx = (targetIdx+1)					// 자리에 위치할 item 인덱스
-		
-		if(actionIdx>images.length-1||_isActiveAni){
-			return;
-		}
-		
-		_isActiveAni = true;
-		
-		images[targetIdx].classList.remove("target");
-		images[actionIdx].classList.add("target");
-		images[targetIdx].style.transition = "transform 2s ease 0s";
-		images[actionIdx].style.transition = "transform 2s ease 0s";
-		images[targetIdx].style.transform = "translateX(-100%)";
-		images[actionIdx].style.transform = "translateX(0%)";
-		
-		_prevBtn.querySelector("i").classList.remove("off");
-		if(actionIdx>=images.length-1){
-			_nextBtn.querySelector("i").classList.remove("off");
-		}
-		
-		_slideSection.querySelector(".figure_pagination > .num").innerHTML=actionIdx+1;
-		// transition delay
-		setTimeout(() => {
-			images[targetIdx].style.transition = "none";
-			_isActiveAni = false;
-		}, 2000);
-	}
-	
-	this.setEvent = function(){
-		_prevBtn.addEventListener("click", function(){
-			if(!this.querySelector("i").classList.contains("off"))
-				_this.prevAnimation();
-		});
-		_nextBtn.addEventListener("click", function(){
-			if(!this.querySelector("i").classList.contains("off"))
-				_this.nextAnimation();
-		});
-	}
-	
-}
-
-function TabList(){
-	var _this = null;
-	var _tabList = null;
-	
-	this.onload = function(element){
-		_this = this;
-		_tabList = element;
 	}
 }
