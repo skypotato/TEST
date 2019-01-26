@@ -1,33 +1,88 @@
 /**
  * 예약앱에서 사용되는 클래스를 정의하는 js 파일
  */
-function SlideImageList(){
+function SlideImage(element){
+	var _this = this;
+	var _slideImageElement = element;
+	
+	this.SlideImage = function(){
+		
+	}
+	this.getElement = function(){
+		return _slideImageElement;
+	}
+	this.setElement = function(element){
+		_slideImageElement = element;
+	}
+	this.removeElement = function(){
+		_slideImageElement.remove();
+	}
+	this.getSlideImageHTML = function(){
+		return _slideImageElement.innerHTML;
+	}
+	this.setSlideImageHTML = function(html){
+		_slideImageElement.innerHTML = html;
+	}
+}
+function SlideImageList(element){
 	var _this = this;
 	var _slideImageArr = [];
+	var _slideImageListElement = element;
 	
-	this.get(index) = function(){
+	this.SlideImageList = function(){
+		_this.mappingSlideImages();
+	}
+	this.getElement = function(){
+		return _slideImageListElement;
+	}
+	this.setElement = function(element){
+		if(index<0||index>=_slideImageArr.length) return false;
 		
+		_slideImageListElement = element;
 	}
-	this.set(index, slideImage){
-		if(index<0||index<_slideImageArr.length)
-			
+	this.get = function(index){
+		if(index<0||index>=_slideImageArr.length) return false;
+		
+		return _slideImageArr[index];
 	}
-	this.add(slideImage){
-		if(!index || !slideImage) return false;
+	this.set = function(index, slideImage){
+		if(index<0||index>=_slideImageArr.length) return false;
+		if(comm.null2void(slideImage)==="") return false;
+		
+		_slideImageArr[index] = slideImage
+	}
+	this.add = function(slideImage){
+		if(comm.null2void(slideImage)==="") return false;
+		
+		_slideImageListElement.insertAdjacentElement(slideImage.getElement());
 		_slideImageArr.push(slideImage);
 	}
-}
-
-
-function ArrayList(){
-	var _this = this;
-	var _arrayList = [];
-	this.get(index) = function(){
+	this.remove = function(index){
+		if(index<0||index>=_slideImageArr.length) return false;
+		
+		_slideImageArr[index].removeElement();
+		_slideImageArr.splice(index, 1);
+	}
+	this.mappingSlideImages = function(){
+		var slideImages = _slideImageListElement.querySelectorAll(".slideImage");
+		slideImages.forEach(function(element){
+			var slideImage = new SlideImage(element);
+			_slideImageArr.push(slideImage);
+		});
+	}
+	this.slideLeft = function(){
 		
 	}
-	this.set(index, object)
+	this.slideRight = function(){
+		
+	}
+	this.startCarousel = function(){
+		
+	}
+	this.stopCarousel = function(){
+		
+	}
 }
-
 
 /**
  * 카테고리 클래스

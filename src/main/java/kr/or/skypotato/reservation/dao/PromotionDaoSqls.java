@@ -7,10 +7,9 @@ public class PromotionDaoSqls {
 			+ "\n	,prm.product_id AS productId "
 			+ "\n	,fileInfo.save_file_name AS productImageUrl "
 			+ "\nFROM promotion prm "
-			+ "\nLEFT JOIN product prd "
-			+ "\nON prm.product_id = prd.id "
 			+ "\nLEFT JOIN product_image prdImg "
-			+ "\nON prd.id = prdImg.product_id and prdImg.type = 'ma'"
+			+ "\nON prm.product_id = prdImg.product_id "
 			+ "\nLEFT JOIN file_info fileInfo "
-			+ "\nON prdImg.file_id = fileInfo.id ";
+			+ "\nON prdImg.file_id = fileInfo.id "
+			+ "\nGROUP BY prm.id";
 }

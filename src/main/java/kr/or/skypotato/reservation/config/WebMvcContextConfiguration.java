@@ -13,17 +13,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ComponentScan(basePackages = { "kr.or.skypotato.reservation.controller" })
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
-	private static final int RESOURCE_CACHE_PERIOD_SECONDS = 31556926;
 	/**
 	 * 리소스 핸들러 설정 <resources location="/resources/" mapping="/resources/**">
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(RESOURCE_CACHE_PERIOD_SECONDS);
-		registry.addResourceHandler("/font/**").addResourceLocations("/font/").setCachePeriod(RESOURCE_CACHE_PERIOD_SECONDS);
-		registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(RESOURCE_CACHE_PERIOD_SECONDS);
-		registry.addResourceHandler("/img_map/**").addResourceLocations("/img_map/").setCachePeriod(RESOURCE_CACHE_PERIOD_SECONDS);
-		registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(RESOURCE_CACHE_PERIOD_SECONDS);
+		registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
+		registry.addResourceHandler("/font/**").addResourceLocations("/font/").setCachePeriod(31556926);
+		registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(31556926);
+		registry.addResourceHandler("/img_map/**").addResourceLocations("/img_map/").setCachePeriod(31556926);
+		registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926);
 	}
 
 	/**

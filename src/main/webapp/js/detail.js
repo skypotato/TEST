@@ -2,68 +2,21 @@
  * detail에 관한 js 파일
  * 작성자 : skypotato
  * 작성일 : 2019.01.03
- * 수정일 : 2019.01.26
  */
 
-// DOMContentLoaded 시점 : HTML과 script가 로드된 시점
-document.addEventListener("DOMContentLoaded", function(event) {
-    _me.domContentLoaded();
-});
-// onload 시점 : (images, script, css, etc)가 로드된 후 발생하는 이벤트
 onload = function(){
 	_me.onload();
 }
-// 현재 페이지 객체
-var _me = {
-	/**
-	 * 현재 페이지 DOMContentLoaded 함수
-	 */
-	domContentLoaded: function(){
-		
-	}
-	/**
-	 *  현재 페이지 onload 함수
-	 */
-	,onload: function(){
-		// nothing
-	}
-	/**
-	 * 이벤트 등록 함수
-	 */
-	,setEvent: function(){
-		document.querySelector("#unFoldBtn").addEventListener("click", function(){
-			var content = document.querySelector("#foldContent");
-			content.classList.remove("close3");
-			document.querySelector("#foldBtn").style.display = "";
-			document.querySelector("#unFoldBtn").style.display = "none";
-		});
-		document.querySelector("#foldBtn").addEventListener("click", function(){
-			var content = document.querySelector("#foldContent");
-			content.classList.add("close3");
-			document.querySelector("#foldBtn").style.display = "none";
-			document.querySelector("#unFoldBtn").style.display = "";
-		});
-	}
-}
-
-
-
-
-
-
 
 var _productImageList = new SlideNaviImages();
 /**
  * 현재 페이지 객체
  */
 var _me = {
-	domContentLoaded: function(){
-		
-	}
 	/**
 	 *  현재 페이지 onload 함수
 	 */
-	,onload: function(){
+	onload: function(){
 		_me.initPage();
 	}
 	/**
